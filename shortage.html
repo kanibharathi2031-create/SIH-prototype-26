@@ -1,0 +1,481 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shortage Risk | SafeRoute Supply</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f8fc;
+            color: #172033;
+        }
+
+        .navbar {
+            background: white;
+            min-height: 65px;
+            padding: 0 35px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .brand {
+            color: #1769e0;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 18px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #64748b;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .nav-links a.active {
+            color: #1769e0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 35px 25px;
+        }
+
+        h1 {
+            color: #123b69;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .label {
+            color: #64748b;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .value {
+            color: #123b69;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .section {
+            color: #123b69;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .table-box {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+            padding: 15px;
+            text-align: left;
+            font-size: 11px;
+        }
+
+        td {
+            padding: 15px;
+            border-top: 1px solid #eef2f7;
+            font-size: 12px;
+        }
+
+        .id {
+            color: #1769e0;
+            font-weight: bold;
+        }
+
+        .high {
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 6px 10px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .low {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 6px 10px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .logic {
+            margin-top: 25px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 22px;
+        }
+
+        .logic h2 {
+            color: #123b69;
+            font-size: 18px;
+            margin-bottom: 18px;
+        }
+
+        .flow {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            background: #eef6ff;
+            border: 1px solid #d5e8fc;
+            color: #174a7c;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .arrow {
+            color: #94a3b8;
+            font-size: 18px;
+        }
+
+        .note {
+            margin-top: 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            color: #64748b;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        @media(max-width: 800px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 500px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="brand">
+            SafeRoute Supply
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Dashboard</a>
+            <a href="/upload">Report</a>
+            <a href="/risk">Risk</a>
+            <a href="/shipments">Shipments</a>
+            <a href="/shortage" class="active">Shortage</a>
+            <a href="/action">Actions</a>
+            <a href="/tracking">Tracking</a>
+            <a href="/vehicle">Vehicle</a>
+            <a href="/security">Security</a>
+
+        </div>
+
+    </nav>
+
+
+    <div class="container">
+
+        <h1>
+            Shortage Risk Analysis
+        </h1>
+
+        <p class="subtitle">
+            Destination supply availability assessment based on shipment delay.
+        </p>
+
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="label">AFFECTED SHIPMENTS</div>
+                <div class="value">{{ shortage_data|length }}</div>
+            </div>
+
+            <div class="card">
+                <div class="label">CURRENT STOCK</div>
+
+                <div class="value">
+                    {% if shortage_data %}
+                        {{ shortage_data[0]["current_stock"] }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="label">STOCK COVERAGE</div>
+
+                <div class="value">
+                    {% if shortage_data %}
+                        {{ shortage_data[0]["hours_of_stock"] }}h
+                    {% else %}
+                        0h
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="label">ROUTE RISK</div>
+
+                <div class="value">
+                    {{ report["risk_level"] }}
+                </div>
+            </div>
+
+        </div>
+
+
+        <h2 class="section">
+            Destination Shortage Assessment
+        </h2>
+
+
+        <div class="table-box">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>SHIPMENT</th>
+                        <th>DESTINATION</th>
+                        <th>CURRENT STOCK</th>
+                        <th>CONSUMPTION / HR</th>
+                        <th>STOCK COVERAGE</th>
+                        <th>REVISED ETA</th>
+                        <th>SHORTAGE RISK</th>
+                        <th>ASSESSMENT</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% if shortage_data %}
+
+                        {% for item in shortage_data %}
+
+                        <tr>
+
+                            <td>
+                                <span class="id">
+                                    {{ item["id"] }}
+                                </span>
+                            </td>
+
+                            <td>
+                                {{ item["destination"] }}
+                            </td>
+
+                            <td>
+                                {{ item["current_stock"] }} units
+                            </td>
+
+                            <td>
+                                {{ item["consumption_rate"] }} units/hr
+                            </td>
+
+                            <td>
+                                {{ item["hours_of_stock"] }} hrs
+                            </td>
+
+                            <td>
+                                {{ item["revised_eta"] }} hrs
+                            </td>
+
+                            <td>
+
+                                {% if item["shortage_status"] == "HIGH" %}
+
+                                    <span class="high">
+                                        HIGH
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="low">
+                                        LOW
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+                                {{ item["shortage_message"] }}
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <tr>
+
+                            <td colspan="8" style="text-align:center; padding:35px;">
+
+                                No affected shipments found.
+
+                            </td>
+
+                        </tr>
+
+                    {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="logic">
+
+            <h2>
+                Shortage Risk Decision Logic
+            </h2>
+
+            <div class="flow">
+
+                <div class="step">
+                    Current Stock
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="step">
+                    Consumption Rate
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="step">
+                    Hours of Stock
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="step">
+                    Revised ETA
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="step">
+                    Shortage Risk
+                </div>
+
+            </div>
+
+
+            <div class="note">
+
+                <strong>Decision:</strong>
+
+                If revised ETA is greater than available stock
+                coverage, the destination is marked as
+                <strong>HIGH shortage risk</strong>.
+
+                Otherwise, it is marked as
+                <strong>LOW shortage risk</strong>.
+
+            </div>
+
+        </div>
+
+
+        <div class="note">
+
+            <strong>Prototype Note:</strong>
+
+            Stock and consumption values are simulated for the
+            SIH prototype demonstration.
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+```
+
+
+
+

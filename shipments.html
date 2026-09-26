@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Affected Shipments - SafeRoute Supply</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f5f8fc;
+            color: #172033;
+        }
+
+        .navbar {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid #e3e9f1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 700;
+            color: #1769d2;
+        }
+
+        .logo span {
+            color: #172033;
+        }
+
+        .nav-title {
+            color: #6d7b90;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 86%;
+            max-width: 1100px;
+            margin: 35px auto 60px;
+        }
+
+        .page-title h1 {
+            font-size: 30px;
+            margin-bottom: 7px;
+        }
+
+        .page-title p {
+            color: #718096;
+            font-size: 15px;
+        }
+
+        /* SUMMARY */
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin: 28px 0;
+        }
+
+        .summary-card {
+            background: white;
+            border: 1px solid #e3e9f1;
+            border-radius: 13px;
+            padding: 20px;
+        }
+
+        .summary-label {
+            color: #7a8799;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .summary-number {
+            font-size: 27px;
+            font-weight: 700;
+            color: #1769d2;
+        }
+
+        /* SHIPMENT CARD */
+        .shipment-card {
+            background: white;
+            border: 1px solid #e3e9f1;
+            border-radius: 14px;
+            padding: 23px;
+            margin-bottom: 16px;
+        }
+
+        .shipment-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .shipment-id {
+            font-size: 19px;
+            font-weight: 700;
+            color: #1769d2;
+        }
+
+        .priority {
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .critical {
+            background: #ffe7e7;
+            color: #c62828;
+        }
+
+        .high {
+            background: #fff0db;
+            color: #c76a00;
+        }
+
+        .medium {
+            background: #fff8d9;
+            color: #927000;
+        }
+
+        .low {
+            background: #e5f7eb;
+            color: #237a3b;
+        }
+
+        .shipment-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .info {
+            background: #f7faff;
+            border: 1px solid #e5ebf4;
+            border-radius: 9px;
+            padding: 13px;
+        }
+
+        .info-label {
+            font-size: 11px;
+            color: #7c899b;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* EMPTY */
+        .empty {
+            background: white;
+            border: 1px solid #e3e9f1;
+            border-radius: 14px;
+            padding: 45px;
+            text-align: center;
+            color: #718096;
+        }
+
+        /* BUTTONS */
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 28px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 13px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .btn-secondary {
+            background: white;
+            border: 1px solid #d5deea;
+            color: #34445a;
+        }
+
+        .btn-primary {
+            background: #1769d2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1258b4;
+        }
+
+        .footer {
+            text-align: center;
+            color: #8a96a7;
+            font-size: 12px;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 750px) {
+
+            .container {
+                width: 92%;
+            }
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .shipment-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .shipment-top {
+                align-items: flex-start;
+                gap: 10px;
+                flex-direction: column;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+
+        <div class="logo">
+            SafeRoute <span>Supply</span>
+        </div>
+
+        <div class="nav-title">
+            Affected Shipments
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+        <!-- TITLE -->
+        <div class="page-title">
+
+            <h1>Affected Shipments</h1>
+
+            <p>
+                Shipments identified as impacted by the reported disruption.
+            </p>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+        <div class="summary">
+
+            <div class="summary-card">
+
+                <div class="summary-label">
+                    Affected Shipments
+                </div>
+
+                <div class="summary-number">
+                    {{ shipments|length }}
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-label">
+                    Critical
+                </div>
+
+                <div class="summary-number">
+                    {{ shipments
+                        |selectattr("priority", "equalto", "CRITICAL")
+                        |list
+                        |length
+                    }}
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-label">
+                    High Priority
+                </div>
+
+                <div class="summary-number">
+                    {{ shipments
+                        |selectattr("priority", "equalto", "HIGH")
+                        |list
+                        |length
+                    }}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SHIPMENTS -->
+
+        {% if shipments %}
+
+            {% for shipment in shipments %}
+
+                <div class="shipment-card">
+
+                    <div class="shipment-top">
+
+                        <div class="shipment-id">
+                            {{ shipment.id }}
+                        </div>
+
+
+                        {% if shipment.priority == "CRITICAL" %}
+
+                            <div class="priority critical">
+                                CRITICAL
+                            </div>
+
+                        {% elif shipment.priority == "HIGH" %}
+
+                            <div class="priority high">
+                                HIGH
+                            </div>
+
+                        {% elif shipment.priority == "MEDIUM" %}
+
+                            <div class="priority medium">
+                                MEDIUM
+                            </div>
+
+                        {% else %}
+
+                            <div class="priority low">
+                                LOW
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="shipment-grid">
+
+                        <div class="info">
+
+                            <div class="info-label">
+                                Shipment Type
+                            </div>
+
+                            <div class="info-value">
+                                {{ shipment.type }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-label">
+                                Destination
+                            </div>
+
+                            <div class="info-value">
+                                {{ shipment.destination }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-label">
+                                Route
+                            </div>
+
+                            <div class="info-value">
+                                {{ shipment.route }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <div class="info-label">
+                                Estimated Delay
+                            </div>
+
+                            <div class="info-value">
+                                +{{ shipment.delay }} Hours
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+                No affected shipments identified for this report.
+            </div>
+
+        {% endif %}
+
+
+        <!-- NAVIGATION -->
+
+        <div class="buttons">
+
+            <a href="/risk" class="btn btn-secondary">
+                ← Back to Risk Analysis
+            </a>
+
+            <a href="/shortage" class="btn btn-primary">
+                Analyze Supply Shortage →
+            </a>
+
+        </div>
+
+
+        <div class="footer">
+            SafeRoute Supply • Shipment Impact Analysis
+        </div>
+
+    </div>
+
+</body>
+</html>

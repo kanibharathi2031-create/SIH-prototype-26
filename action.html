@@ -1,0 +1,407 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recommended Actions | SafeRoute Supply</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f9ff;
+            color: #172033;
+        }
+
+        .navbar {
+            background: white;
+            border-bottom: 1px solid #dbe7f5;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1769d2;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #1769d2;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 86%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .header {
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #68758a;
+            font-size: 16px;
+        }
+
+        .alert {
+            background: #fff1f1;
+            border: 1px solid #ffcaca;
+            color: #b42318;
+            padding: 18px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .recommended {
+            background: white;
+            border: 1px solid #d9e6f5;
+            border-left: 5px solid #1769d2;
+            padding: 22px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(23, 105, 210, 0.06);
+        }
+
+        .recommended-title {
+            color: #1769d2;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .recommended-action {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .risk {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #ffe7e7;
+            color: #b42318;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .section-title {
+            font-size: 21px;
+            margin-bottom: 18px;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .action-card {
+            background: white;
+            border: 1px solid #dbe7f5;
+            border-radius: 14px;
+            padding: 22px;
+            transition: 0.2s;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(23, 105, 210, 0.10);
+        }
+
+        .action-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .action-name {
+            font-size: 19px;
+            font-weight: bold;
+            color: #1769d2;
+            margin-bottom: 10px;
+        }
+
+        .action-description {
+            color: #657287;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .priority {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            background: #eaf3ff;
+            color: #1769d2;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            margin-top: 35px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .primary {
+            background: #1769d2;
+            color: white;
+        }
+
+        .secondary {
+            background: white;
+            color: #1769d2;
+            border: 1px solid #1769d2;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 92%;
+                margin-top: 25px;
+            }
+
+            .header h1 {
+                font-size: 26px;
+            }
+
+            .navbar {
+                padding: 15px 4%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            SafeRoute Supply
+        </div>
+
+        <a href="/" class="nav-link">
+            Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <h1>
+                Recommended Actions
+            </h1>
+
+            <p>
+                Decision support for maintaining essential supply continuity.
+            </p>
+
+        </div>
+
+
+        <!-- CRITICAL ALERT -->
+
+        {% if risk_level == "CRITICAL" %}
+
+        <div class="alert">
+
+            ⚠ Critical disruption detected.
+            Immediate action is recommended.
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- AI RECOMMENDATION -->
+
+        <div class="recommended">
+
+            <div class="recommended-title">
+                AI Recommended Action
+            </div>
+
+            <div class="recommended-action">
+                {{ recommended_action }}
+            </div>
+
+            <span class="risk">
+                Risk Level: {{ risk_level }}
+            </span>
+
+        </div>
+
+
+        <!-- ACTION LIST -->
+
+        <h2 class="section-title">
+            Available Response Actions
+        </h2>
+
+
+        <div class="actions">
+
+
+            {% for action in actions %}
+
+            <div class="action-card">
+
+                <div class="action-icon">
+
+                    {% if "REROUTE" in action %}
+                        🔄
+                    {% elif "PRIORITIZE" in action %}
+                        🚨
+                    {% elif "ESCALATE" in action %}
+                        📢
+                    {% elif "MONITOR" in action %}
+                        👁️
+                    {% elif "RESCHEDULE" in action %}
+                        🕒
+                    {% else %}
+                        ⚡
+                    {% endif %}
+
+                </div>
+
+
+                <div class="action-name">
+                    {{ action }}
+                </div>
+
+
+                <div class="action-description">
+
+                    {% if "REROUTE" in action %}
+
+                        Identify an alternate route and redirect
+                        affected essential shipments.
+
+                    {% elif "PRIORITIZE" in action %}
+
+                        Give priority to critical medical and
+                        emergency supplies.
+
+                    {% elif "ESCALATE" in action %}
+
+                        Notify the responsible logistics team
+                        about the critical route condition.
+
+                    {% elif "MONITOR" in action %}
+
+                        Continuously monitor the route and
+                        vehicle movement for new changes.
+
+                    {% elif "RESCHEDULE" in action %}
+
+                        Adjust shipment timing based on the
+                        updated route condition.
+
+                    {% else %}
+
+                        Continue assessing the situation and
+                        take appropriate logistics action.
+
+                    {% endif %}
+
+                </div>
+
+
+                <span class="priority">
+
+                    {% if risk_level == "CRITICAL" %}
+                        Priority: CRITICAL
+                    {% elif risk_level == "HIGH" %}
+                        Priority: HIGH
+                    {% elif risk_level == "MEDIUM" %}
+                        Priority: MEDIUM
+                    {% else %}
+                        Priority: NORMAL
+                    {% endif %}
+
+                </span>
+
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+            <a href="/shortage" class="btn primary">
+                View Shortage Risk
+            </a>
+
+            <a href="/shipments" class="btn secondary">
+                View Shipments
+            </a>
+
+            <a href="/vehicle" class="btn secondary">
+                Vehicle Monitoring
+            </a>
+
+            <a href="/" class="btn secondary">
+                Back to Dashboard
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
+```

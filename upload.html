@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Field Report | SafeRoute Supply</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f8fc;
+            color: #172033;
+        }
+
+        .navbar {
+            height: 70px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 35px;
+            border-bottom: 1px solid #e5eaf1;
+        }
+
+        .logo {
+            color: #1464d2;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .heading {
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #687386;
+        }
+
+        .form-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #e5eaf1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd5e2;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            background: #f7f9fc;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background: #1464d2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0f4fa8;
+        }
+
+        .success {
+            background: #eaf7ee;
+            border: 1px solid #a9d8b5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #26733b;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #1464d2;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="logo">SafeRoute Supply</div>
+    </div>
+
+    <div class="container">
+
+        <div class="heading">
+            <h1>Upload Field Report</h1>
+            <p>Report road disruptions and ground conditions.</p>
+        </div>
+
+        {% if success %}
+        <div class="success">
+            ✓ Field report submitted successfully.
+        </div>
+        {% endif %}
+
+        <div class="form-box">
+
+            <form action="/submit-report" method="POST"
+                  enctype="multipart/form-data">
+
+                <label>Report Type</label>
+
+                <select name="report_type" required>
+                    <option value="">Select disruption</option>
+                    <option value="Flood">Flood</option>
+                    <option value="Landslide">Landslide</option>
+                    <option value="Road Block">Road Block</option>
+                    <option value="Heavy Rain">Heavy Rain</option>
+                    <option value="Road Damage">Road Damage</option>
+                </select>
+
+                <label>Location / Road</label>
+
+                <input
+                    type="text"
+                    name="location"
+                    placeholder="Example: NH-27, District Road 12"
+                    required
+                >
+
+                <label>Upload Photo</label>
+
+                <input
+                    type="file"
+                    name="photo"
+                    accept="image/*"
+                >
+
+                <label>Description</label>
+
+                <textarea
+                    name="description"
+                    placeholder="Describe the road condition..."
+                    required
+                ></textarea>
+
+                <button type="submit">
+                    Submit Field Report
+                </button>
+
+            </form>
+
+            <a href="/" class="back">← Back to Dashboard</a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

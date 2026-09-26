@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Route & Tracking | SafeRoute Supply</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f9ff;
+            color: #172033;
+        }
+
+        .navbar {
+            background: white;
+            border-bottom: 1px solid #dbe7f5;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #1769d2;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #1769d2;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 86%;
+            max-width: 1150px;
+            margin: 38px auto;
+        }
+
+        .header {
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #68758a;
+        }
+
+        .status-banner {
+            background: #fff1f1;
+            border: 1px solid #ffcaca;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 22px;
+            color: #b42318;
+            font-weight: bold;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 20px;
+        }
+
+        .map-card,
+        .details-card {
+            background: white;
+            border: 1px solid #dbe7f5;
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+        .map-card h2,
+        .details-card h2 {
+            margin-bottom: 20px;
+            font-size: 21px;
+        }
+
+        .route-map {
+            min-height: 420px;
+            background: #eef6ff;
+            border: 1px solid #cfe1f7;
+            border-radius: 12px;
+            padding: 25px;
+            position: relative;
+        }
+
+        .route-line {
+            position: absolute;
+            left: 50%;
+            top: 55px;
+            bottom: 55px;
+            width: 5px;
+            background: #1769d2;
+            transform: translateX(-50%);
+            border-radius: 10px;
+        }
+
+        .point {
+            position: relative;
+            z-index: 2;
+            width: 185px;
+            margin: 0 auto 55px;
+            background: white;
+            border: 1px solid #c9dbef;
+            border-radius: 10px;
+            padding: 13px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(23, 105, 210, 0.08);
+        }
+
+        .point strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .point span {
+            font-size: 12px;
+            color: #68758a;
+        }
+
+        .danger {
+            border: 2px solid #e5484d;
+            color: #b42318;
+        }
+
+        .alternate {
+            border: 2px solid #1769d2;
+            color: #1769d2;
+        }
+
+        .route-label {
+            text-align: center;
+            margin: -35px 0 28px;
+            color: #68758a;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .info {
+            margin-bottom: 18px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #edf1f6;
+        }
+
+        .info:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            color: #7a8799;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .value {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .blue {
+            color: #1769d2;
+        }
+
+        .red {
+            color: #b42318;
+        }
+
+        .green {
+            color: #18864b;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 11px;
+            border-radius: 15px;
+            background: #eaf3ff;
+            color: #1769d2;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .actions {
+            margin-top: 22px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 11px 17px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .primary {
+            background: #1769d2;
+            color: white;
+        }
+
+        .secondary {
+            background: white;
+            color: #1769d2;
+            border: 1px solid #1769d2;
+        }
+
+        @media (max-width: 800px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 92%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+            SafeRoute Supply
+        </div>
+
+        <a href="/" class="nav-link">
+            Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="header">
+            <h1>Route & Shipment Tracking</h1>
+            <p>
+                Monitor route disruption, alternate routing and estimated delivery time.
+            </p>
+        </div>
+
+
+        <div class="status-banner">
+            ⚠ Route disruption detected on NH-27 — alternate route recommended.
+        </div>
+
+
+        <div class="layout">
+
+            <div class="map-card">
+
+                <h2>Shipment Route</h2>
+
+                <div class="route-map">
+
+                    <div class="route-line"></div>
+
+                    <div class="point">
+                        <strong>📍 Origin</strong>
+                        <span>Supply Distribution Centre</span>
+                    </div>
+
+                    <div class="point danger">
+                        <strong>⚠ Disruption</strong>
+                        <span>NH-27 • Flood / Road Block</span>
+                    </div>
+
+                    <div class="route-label">
+                        Original Route Blocked
+                    </div>
+
+                    <div class="point alternate">
+                        <strong>🔄 Alternate Route</strong>
+                        <span>Route 12 • Recommended</span>
+                    </div>
+
+                    <div class="point">
+                        <strong>🏥 Destination</strong>
+                        <span>Emergency Hospital C</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-card">
+
+                <h2>Shipment Details</h2>
+
+                <div class="info">
+                    <div class="label">Shipment ID</div>
+                    <div class="value">SR-114</div>
+                </div>
+
+                <div class="info">
+                    <div class="label">Cargo</div>
+                    <div class="value">Emergency Medicines</div>
+                </div>
+
+                <div class="info">
+                    <div class="label">Priority</div>
+                    <div class="value red">CRITICAL</div>
+                </div>
+
+                <div class="info">
+                    <div class="label">Original Route</div>
+                    <div class="value">NH-27</div>
+                </div>
+
+                <div class="info">
+                    <div class="label">Current Status</div>
+                    <div class="value">
+                        <span class="badge">REROUTING</span>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <div class="label">Original ETA</div>
+                    <div class="value red">12 Hours</div>
+                </div>
+
+                <div class="info">
+                    <div class="label">Revised ETA</div>
+                    <div class="value green">4 Hours</div>
+                </div>
+
+                <div class="info">
+                    <div class="label">Recommended Action</div>
+                    <div class="value blue">
+                        Reroute + Prioritize
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="actions">
+
+            <a href="/shortage" class="btn primary">
+                View Shortage Risk
+            </a>
+
+            <a href="/action" class="btn secondary">
+                View Recommended Action
+            </a>
+
+            <a href="/shipments" class="btn secondary">
+                Back to Shipments
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

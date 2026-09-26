@@ -1,0 +1,691 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Risk Analysis | SafeRoute Supply</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f8fc;
+            color: #172033;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 40px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1456c0;
+        }
+
+        .tagline {
+            margin-top: 4px;
+            font-size: 12px;
+            color: #718096;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #475569;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #1456c0;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            max-width: 1150px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            font-size: 30px;
+            color: #172033;
+        }
+
+        .page-title p {
+            margin-top: 7px;
+            color: #718096;
+            font-size: 14px;
+        }
+
+        /* ================= GRID ================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 24px;
+
+            box-shadow:
+                0 5px 18px rgba(30, 60, 90, 0.05);
+        }
+
+        .card h2 {
+            font-size: 19px;
+            color: #1e293b;
+            margin-bottom: 18px;
+        }
+
+        .full-card {
+            margin-top: 22px;
+        }
+
+        /* ================= INFO ================= */
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid #edf1f5;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .value {
+            color: #1e293b;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* ================= RISK ================= */
+
+        .risk-box {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .risk-level {
+            display: inline-block;
+
+            padding: 9px 25px;
+
+            border-radius: 25px;
+
+            background: #fff4e5;
+            color: #b45309;
+
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .score {
+            margin-top: 15px;
+
+            font-size: 50px;
+            font-weight: 800;
+
+            color: #1456c0;
+        }
+
+        .score-label {
+            color: #718096;
+            font-size: 13px;
+        }
+
+        /* ================= PROGRESS ================= */
+
+        .progress {
+            width: 100%;
+            height: 12px;
+
+            margin-top: 20px;
+
+            background: #e8edf3;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+
+            /* Flood demo = 87 */
+            width: 87%;
+
+            background: #1456c0;
+
+            border-radius: 20px;
+        }
+
+        /* ================= DESCRIPTION ================= */
+
+        .description {
+            color: #4a5568;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+        /* ================= ACTION ================= */
+
+        .action-box {
+            margin-top: 10px;
+
+            padding: 18px;
+
+            background: #eef6ff;
+
+            border: 1px solid #cfe3ff;
+
+            border-radius: 10px;
+        }
+
+        .action-label {
+            margin-bottom: 8px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            color: #64748b;
+
+            text-transform: uppercase;
+        }
+
+        .action-text {
+            font-size: 18px;
+            font-weight: 700;
+
+            color: #1456c0;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+            margin-top: 25px;
+
+            display: flex;
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 12px 20px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #1456c0;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0f46a0;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #1456c0;
+
+            border: 1px solid #b9d2f5;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f6ff;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            text-align: center;
+
+            padding: 30px;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 0 18px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title h1 {
+                font-size: 25px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <div class="navbar">
+
+        <div>
+
+            <div class="logo">
+                SafeRoute Supply
+            </div>
+
+            <div class="tagline">
+                Offline AI for resilient essential-supply delivery
+            </div>
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="/">
+                Dashboard
+            </a>
+
+            <a href="/upload">
+                Report
+            </a>
+
+            <a href="/risk">
+                Risk
+            </a>
+
+            <a href="/shipments">
+                Shipments
+            </a>
+
+            <a href="/shortage">
+                Shortage
+            </a>
+
+            <a href="/action">
+                Action
+            </a>
+
+            <a href="/vehicle">
+                Vehicles
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+
+        <div class="page-title">
+
+            <h1>
+                Disruption Risk Analysis
+            </h1>
+
+            <p>
+                AI-based assessment of route disruption and shipment impact.
+            </p>
+
+        </div>
+
+
+
+        <!-- ================= TOP CARDS ================= -->
+
+        <div class="grid">
+
+
+            <!-- REPORT DETAILS -->
+
+            <div class="card">
+
+                <h2>
+                    Report Details
+                </h2>
+
+
+                <div class="info-row">
+
+                    <span class="label">
+                        Report Type
+                    </span>
+
+                    <span class="value">
+                        {{ report_type }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="label">
+                        Location / Route
+                    </span>
+
+                    <span class="value">
+                        {{ location }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="label">
+                        Photo
+                    </span>
+
+                    <span class="value">
+                        {{ photo_name }}
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="label">
+                        Reported Time
+                    </span>
+
+                    <span class="value">
+                        {{ time }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RISK ASSESSMENT -->
+
+            <div class="card">
+
+                <h2>
+                    Risk Assessment
+                </h2>
+
+
+                <div class="risk-box">
+
+
+                    <!-- FIXED DEMO VALUE -->
+
+                    <div class="risk-level">
+                        HIGH
+                    </div>
+
+
+                    <div class="score">
+                        87
+                    </div>
+
+
+                    <div class="score-label">
+                        Risk Score / 100
+                    </div>
+
+
+                    <div class="progress">
+
+                        <div class="progress-bar"></div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= DESCRIPTION ================= -->
+
+        <div class="card full-card">
+
+            <h2>
+                Disruption Description
+            </h2>
+
+            <p class="description">
+
+                {{ description }}
+
+            </p>
+
+        </div>
+
+
+
+        <!-- ================= IMPACT + REASON ================= -->
+
+        <div
+            class="grid"
+            style="margin-top: 22px;"
+        >
+
+
+            <!-- IMPACT -->
+
+            <div class="card">
+
+                <h2>
+                    Shipment / Route Impact
+                </h2>
+
+                <p class="description">
+
+                    {{ impact }}
+
+                </p>
+
+            </div>
+
+
+
+            <!-- RISK REASON -->
+
+            <div class="card">
+
+                <h2>
+                    Why This Risk Was Detected
+                </h2>
+
+                <p class="description">
+
+                    {{ risk_reason }}
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================= RECOMMENDED ACTION ================= -->
+
+        <div class="card full-card">
+
+            <h2>
+                Recommended AI Action
+            </h2>
+
+
+            <div class="action-box">
+
+                <div class="action-label">
+                    Decision Engine Output
+                </div>
+
+
+                <div class="action-text">
+
+                    REROUTE CRITICAL SHIPMENTS
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="info-row"
+                style="margin-top: 15px;"
+            >
+
+                <span class="label">
+                    Action Type
+                </span>
+
+                <span class="value">
+                    REROUTE
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= BUTTONS ================= -->
+
+        <div class="buttons">
+
+
+            <a
+                href="/shipments"
+                class="btn btn-primary"
+            >
+                View Affected Shipments
+            </a>
+
+
+            <a
+                href="/shortage"
+                class="btn btn-primary"
+            >
+                Check Shortage Risk
+            </a>
+
+
+            <a
+                href="/action"
+                class="btn btn-secondary"
+            >
+                View Recommended Actions
+            </a>
+
+
+            <a
+                href="/"
+                class="btn btn-secondary"
+            >
+                Back to Dashboard
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <div class="footer">
+
+        SafeRoute Supply • SIH 2026 Prototype
+
+    </div>
+
+
+</body>
+
+</html>
+```
+
+
+

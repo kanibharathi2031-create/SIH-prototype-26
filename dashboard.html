@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | SafeRoute Supply</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f5f8fc;
+            color: #172033;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 70px;
+            background: #ffffff;
+            border-bottom: 1px solid #e4e9f1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 42px;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1769e0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #526078;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #1769e0;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 92%;
+            max-width: 1250px;
+            margin: 35px auto;
+        }
+
+        .header {
+            margin-bottom: 28px;
+        }
+
+        .header h1 {
+            font-size: 31px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #68758a;
+            font-size: 15px;
+        }
+
+        .system-status {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 7px 13px;
+            border-radius: 20px;
+            background: #eaf8ef;
+            color: #17864b;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* OVERVIEW */
+
+        .overview {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 13px;
+            padding: 21px;
+        }
+
+        .stat-label {
+            color: #718096;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .blue {
+            color: #1769e0;
+        }
+
+        .green {
+            color: #17864b;
+        }
+
+        .red {
+            color: #d9363e;
+        }
+
+        /* CURRENT ALERT */
+
+        .alert {
+            background: #fff5f5;
+            border: 1px solid #ffd5d5;
+            border-radius: 13px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .alert h2 {
+            color: #c62828;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .alert p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .alert-action {
+            margin-top: 12px;
+            color: #1769e0;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* SECTION TITLE */
+
+        .section-title {
+            font-size: 21px;
+            margin-bottom: 17px;
+        }
+
+        /* DECISION FLOW */
+
+        .flow-container {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .flow {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            overflow-x: auto;
+        }
+
+        .flow-box {
+            min-width: 145px;
+            background: #f5f8fd;
+            border: 1px solid #dce5f2;
+            border-radius: 10px;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .flow-box.active {
+            background: #eef5ff;
+            border-color: #bcd4fa;
+            color: #1769e0;
+        }
+
+        .arrow {
+            color: #1769e0;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* QUICK ACTIONS */
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 32px;
+        }
+
+        .quick-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 13px;
+            padding: 22px;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.2s;
+        }
+
+        .quick-card:hover {
+            border-color: #1769e0;
+            transform: translateY(-2px);
+        }
+
+        .quick-icon {
+            width: 43px;
+            height: 43px;
+            border-radius: 10px;
+            background: #eef5ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            margin-bottom: 15px;
+        }
+
+        .quick-card h3 {
+            font-size: 16px;
+            margin-bottom: 7px;
+        }
+
+        .quick-card p {
+            color: #718096;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .quick-arrow {
+            display: block;
+            margin-top: 15px;
+            color: #1769e0;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* MONITORING */
+
+        .monitoring {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .monitoring-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .monitoring-header h2 {
+            font-size: 20px;
+        }
+
+        .view-link {
+            text-decoration: none;
+            color: #1769e0;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .vehicle-card {
+            background: #f8fafc;
+            border: 1px solid #e5eaf1;
+            border-radius: 10px;
+            padding: 17px;
+        }
+
+        .vehicle-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 13px;
+        }
+
+        .vehicle-id {
+            font-weight: 700;
+        }
+
+        .vehicle-status {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 5px 8px;
+            border-radius: 15px;
+            background: #eaf8ef;
+            color: #17864b;
+        }
+
+        .vehicle-info {
+            color: #68758a;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .vehicle-info strong {
+            color: #374151;
+        }
+
+        /* ROAD */
+
+        .road-status {
+            margin-top: 18px;
+            padding: 17px;
+            border-radius: 10px;
+            background: #eef5ff;
+            border: 1px solid #d7e7ff;
+        }
+
+        .road-status h3 {
+            color: #1769e0;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .road-status p {
+            color: #526078;
+            font-size: 13px;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #8a94a6;
+            font-size: 12px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 950px) {
+
+            .overview {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .quick-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .vehicle-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .overview,
+            .quick-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .container {
+                width: 94%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="brand">
+            SafeRoute Supply
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Dashboard</a>
+            <a href="/upload">Report</a>
+            <a href="/risk">Risk</a>
+            <a href="/shipments">Shipments</a>
+            <a href="/shortage">Shortage</a>
+            <a href="/action">Actions</a>
+            <a href="/vehicle">Vehicle Monitor</a>
+            <a href="/security">Security</a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <h1>
+                SafeRoute Supply Dashboard
+            </h1>
+
+            <p>
+                AI-assisted logistics monitoring for resilient delivery
+                of essential supplies.
+            </p>
+
+            <span class="system-status">
+                ● SYSTEM ACTIVE
+            </span>
+
+        </div>
+
+
+        <!-- OVERVIEW -->
+
+        <div class="overview">
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Current Risk
+                </div>
+
+                <div class="stat-value red">
+                    {{ report.risk_level }}
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Risk Score
+                </div>
+
+                <div class="stat-value blue">
+                    {{ report.risk_score }}/100
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Demo Shipments
+                </div>
+
+                <div class="stat-value blue">
+                    {{ shipments|length }}
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-label">
+                    Vehicle Monitoring
+                </div>
+
+                <div class="stat-value green">
+                    ACTIVE
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CURRENT ALERT -->
+
+        <div class="alert">
+
+            <h2>
+                ⚠ {{ report.report_type }} Detected
+            </h2>
+
+            <p>
+                {{ report.description }}
+            </p>
+
+            <div class="alert-action">
+                Recommended Action:
+                {{ report.recommended_action }}
+            </div>
+
+        </div>
+
+
+        <!-- DECISION FLOW -->
+
+        <div class="flow-container">
+
+            <h2 class="section-title">
+                Disruption-to-Action Flow
+            </h2>
+
+            <div class="flow">
+
+                <div class="flow-box active">
+                    Disruption
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-box active">
+                    Shipment Impact
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-box active">
+                    Shortage Risk
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-box active">
+                    Action
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-box">
+                    Supply Continuity
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <h2 class="section-title">
+            Quick Access
+        </h2>
+
+        <div class="quick-grid">
+
+
+            <a href="/upload" class="quick-card">
+
+                <div class="quick-icon">
+                    📤
+                </div>
+
+                <h3>
+                    Report Disruption
+                </h3>
+
+                <p>
+                    Submit flood, landslide, heavy rain,
+                    road damage or road block reports.
+                </p>
+
+                <span class="quick-arrow">
+                    Open Report →
+                </span>
+
+            </a>
+
+
+            <a href="/shipments" class="quick-card">
+
+                <div class="quick-icon">
+                    📦
+                </div>
+
+                <h3>
+                    Affected Shipments
+                </h3>
+
+                <p>
+                    Identify essential shipments affected
+                    by the detected disruption.
+                </p>
+
+                <span class="quick-arrow">
+                    View Shipments →
+                </span>
+
+            </a>
+
+
+            <a href="/shortage" class="quick-card">
+
+                <div class="quick-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Shortage Risk
+                </h3>
+
+                <p>
+                    Compare available stock coverage
+                    against revised delivery time.
+                </p>
+
+                <span class="quick-arrow">
+                    Check Shortage →
+                </span>
+
+            </a>
+
+
+            <a href="/action" class="quick-card">
+
+                <div class="quick-icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Recommended Actions
+                </h3>
+
+                <p>
+                    View reroute, prioritize, reschedule
+                    and escalation recommendations.
+                </p>
+
+                <span class="quick-arrow">
+                    View Actions →
+                </span>
+
+            </a>
+
+
+            <a href="/tracking" class="quick-card">
+
+                <div class="quick-icon">
+                    🛰️
+                </div>
+
+                <h3>
+                    Shipment Tracking
+                </h3>
+
+                <p>
+                    Follow the affected shipment route
+                    and revised delivery plan.
+                </p>
+
+                <span class="quick-arrow">
+                    Track Shipment →
+                </span>
+
+            </a>
+
+
+            <!-- NEW VEHICLE MONITORING -->
+
+            <a href="/vehicle" class="quick-card">
+
+                <div class="quick-icon">
+                    🚚
+                </div>
+
+                <h3>
+                    Vehicle & Road Monitoring
+                </h3>
+
+                <p>
+                    Monitor vehicle movement, road condition,
+                    accessibility and route safety.
+                </p>
+
+                <span class="quick-arrow">
+                    Open Vehicle Monitor →
+                </span>
+
+            </a>
+
+
+        </div>
+
+
+        <!-- VEHICLE MONITORING -->
+
+        <div class="monitoring">
+
+            <div class="monitoring-header">
+
+                <h2>
+                    🚚 Vehicle Monitoring Overview
+                </h2>
+
+                <a
+                    href="/vehicle"
+                    class="view-link">
+
+                    View Full Monitoring →
+
+                </a>
+
+            </div>
+
+
+            <div class="vehicle-grid">
+
+                {% for vehicle in vehicles %}
+
+                <div class="vehicle-card">
+
+                    <div class="vehicle-top">
+
+                        <span class="vehicle-id">
+                            {{ vehicle.id }}
+                        </span>
+
+                        <span class="vehicle-status">
+                            {{ vehicle.vehicle_status }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="vehicle-info">
+
+                        <strong>Location:</strong>
+                        {{ vehicle.location }}
+
+                        <br>
+
+                        <strong>Route:</strong>
+                        {{ vehicle.route }}
+
+                        <br>
+
+                        <strong>Destination:</strong>
+                        {{ vehicle.destination }}
+
+                        <br>
+
+                        <strong>Speed:</strong>
+                        {{ vehicle.speed }} km/h
+
+                        <br>
+
+                        <strong>ETA:</strong>
+                        {{ vehicle.eta }} hrs
+
+                        <br>
+
+                        <strong>Road:</strong>
+                        {{ vehicle.road_status }}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- ROAD STATUS -->
+
+            <div class="road-status">
+
+                <h3>
+                    🛣️ Road Monitoring — {{ road.route }}
+                </h3>
+
+                <p>
+
+                    <strong>Condition:</strong>
+                    {{ road.condition }}
+
+                    &nbsp; | &nbsp;
+
+                    <strong>Accessibility:</strong>
+                    {{ road.accessibility }}
+
+                    &nbsp; | &nbsp;
+
+                    <strong>Risk:</strong>
+                    {{ road.risk_level }}
+
+                    <br><br>
+
+                    <strong>Recommended:</strong>
+                    {{ road.recommended_action }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SECURITY -->
+
+        <div class="quick-grid">
+
+            <a href="/security" class="quick-card">
+
+                <div class="quick-icon">
+                    🔐
+                </div>
+
+                <h3>
+                    Security
+                </h3>
+
+                <p>
+                    Review prototype security controls,
+                    validation and protected processing flow.
+                </p>
+
+                <span class="quick-arrow">
+                    View Security →
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <div class="footer">
+
+            SafeRoute Supply · SIH 2026 Prototype
+
+            <br>
+
+            Offline-first resilient logistics monitoring
+
+        </div>
+
+    </main>
+
+</body>
+</html>

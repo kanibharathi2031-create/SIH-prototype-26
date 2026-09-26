@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Security | SafeRoute Supply</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f9ff;
+            color: #172033;
+        }
+
+        .navbar {
+            background: white;
+            border-bottom: 1px solid #dbe7f5;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+            color: #1769d2;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #1769d2;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 86%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .header {
+            margin-bottom: 28px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #68758a;
+            line-height: 1.5;
+        }
+
+        .security-banner {
+            background: #1769d2;
+            color: white;
+            padding: 24px;
+            border-radius: 14px;
+            margin-bottom: 28px;
+        }
+
+        .security-banner h2 {
+            margin-bottom: 8px;
+        }
+
+        .security-banner p {
+            color: #e1efff;
+            line-height: 1.5;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #dbe7f5;
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #eaf3ff;
+            color: #1769d2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 9px;
+        }
+
+        .card p {
+            color: #68758a;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            background: #eef6ff;
+            color: #1769d2;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .architecture {
+            background: white;
+            border: 1px solid #dbe7f5;
+            border-radius: 14px;
+            padding: 24px;
+            margin-top: 28px;
+        }
+
+        .architecture h2 {
+            margin-bottom: 18px;
+        }
+
+        .flow {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .flow-box {
+            background: #eef6ff;
+            color: #1769d2;
+            padding: 16px 10px;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 12px 19px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .primary {
+            background: #1769d2;
+            color: white;
+        }
+
+        .secondary {
+            background: white;
+            color: #1769d2;
+            border: 1px solid #1769d2;
+        }
+
+        @media (max-width: 750px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+            SafeRoute Supply
+        </div>
+
+        <a href="/" class="nav-link">
+            Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="header">
+
+            <h1>Security & Data Protection</h1>
+
+            <p>
+                Security considerations for protecting field reports,
+                shipment information and operational data.
+            </p>
+
+        </div>
+
+
+        <div class="security-banner">
+
+            <h2>🔐 Secure-by-Design Approach</h2>
+
+            <p>
+                SafeRoute Supply is designed to protect operational
+                information while supporting reliable decision-making
+                during disruption scenarios.
+            </p>
+
+        </div>
+
+
+        <div class="grid">
+
+            <div class="card">
+
+                <div class="icon">📁</div>
+
+                <h3>Secure File Upload</h3>
+
+                <p>
+                    Uploaded field reports should be validated for
+                    allowed file types and safe input before processing.
+                </p>
+
+                <span class="status">
+                    File Validation
+                </span>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🛡️</div>
+
+                <h3>Input Validation</h3>
+
+                <p>
+                    User-provided location, description and report
+                    information should be validated before entering
+                    the decision workflow.
+                </p>
+
+                <span class="status">
+                    Input Protection
+                </span>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🔑</div>
+
+                <h3>Authentication</h3>
+
+                <p>
+                    In a production deployment, authenticated users
+                    can be given access according to their operational
+                    role.
+                </p>
+
+                <span class="status">
+                    Role-Based Access
+                </span>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🔒</div>
+
+                <h3>Data Protection</h3>
+
+                <p>
+                    Sensitive operational data should be protected
+                    during storage and communication between system
+                    components.
+                </p>
+
+                <span class="status">
+                    Data Security
+                </span>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">📱</div>
+
+                <h3>Offline-First Security</h3>
+
+                <p>
+                    The platform is designed around offline operation
+                    for disaster-prone areas, reducing dependency on
+                    continuous connectivity.
+                </p>
+
+                <span class="status">
+                    Offline Ready
+                </span>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">👤</div>
+
+                <h3>Access Control</h3>
+
+                <p>
+                    Different operational roles can be separated so
+                    users only access the information and actions
+                    relevant to their responsibilities.
+                </p>
+
+                <span class="status">
+                    Access Control
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="architecture">
+
+            <h2>Security Flow</h2>
+
+            <div class="flow">
+
+                <div class="flow-box">
+                    User Input
+                </div>
+
+                <div class="flow-box">
+                    Validation
+                </div>
+
+                <div class="flow-box">
+                    Protected Processing
+                </div>
+
+                <div class="flow-box">
+                    Controlled Output
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="buttons">
+
+            <a href="/" class="btn primary">
+                Back to Dashboard
+            </a>
+
+            <a href="/upload" class="btn secondary">
+                Upload Report
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
